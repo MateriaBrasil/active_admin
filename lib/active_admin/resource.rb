@@ -1,5 +1,7 @@
 require 'active_admin/resource/action_items'
 require 'active_admin/resource/menu'
+require 'active_admin/resource/page_presenters'
+require 'active_admin/resource/pagination'
 require 'active_admin/resource/naming'
 require 'active_admin/resource/scopes'
 require 'active_admin/resource/sidebars'
@@ -64,6 +66,9 @@ module ActiveAdmin
     end
 
     include Base
+    include Controllers
+    include PagePresenters
+    include Pagination
     include ActionItems
     include Menu
     include Naming
