@@ -1,7 +1,7 @@
 require 'formtastic'
 
 module ActiveAdmin
-  class FormBuilder < ::Formtastic::SemanticFormBuilder
+  class FormBuilder < ::Formtastic::FormBuilder
 
     def datepicker_input(method, options)
       options = options.dup
