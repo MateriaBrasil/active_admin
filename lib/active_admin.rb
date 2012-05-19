@@ -29,6 +29,7 @@ module ActiveAdmin
   autoload :FormBuilder,              'active_admin/form_builder'
   autoload :FilterFormBuilder,        'active_admin/filter_form_builder'
   autoload :Inputs,                   'active_admin/inputs'
+  autoload :DslFormBuilder,           'active_admin/dsl_form_builder'
   autoload :Iconic,                   'active_admin/iconic'
   autoload :Menu,                     'active_admin/menu'
   autoload :MenuItem,                 'active_admin/menu_item'

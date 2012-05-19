@@ -64,7 +64,7 @@ module ActiveAdmin
         end
 
         def build_comment_form
-          self << active_admin_form_for(ActiveAdmin::Comment.new, :url => comment_form_url, :html => {:class => "inline_form"}) do |form|
+          self << active_admin_dsl_form_for(ActiveAdmin::Comment.new, :url => comment_form_url, :html => {:class => "inline_form"}) do |form|
             form.inputs do
               form.input :resource_type, :value => ActiveAdmin::Comment.resource_type(@record), :as => :hidden
               form.input :resource_id, :value => @record.id, :as => :hidden
