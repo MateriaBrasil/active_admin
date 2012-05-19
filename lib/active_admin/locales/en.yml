@@ -9,7 +9,9 @@ en:
     delete: "Delete"
     delete_confirmation: "Are you sure you want to delete this?"
     new_model: "New %{model}"
+    create_model: "New %{model}"
     edit_model: "Edit %{model}"
+    update_model: "Edit %{model}"
     delete_model: "Delete %{model}"
     details: "%{model} Details"
     cancel: "Cancel"
@@ -34,6 +36,9 @@ en:
       one: "Displaying <b>1</b> %{model}"
       one_page: "Displaying <b>all %{n}</b> %{model}"
       multiple: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{total}</b> in total"
+      entry:
+        one: "entry"
+        other: "entries"
     any: "Any"
     blank_slate:
       content: "There are no %{resource_name} yet."

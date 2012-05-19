@@ -1,5 +1,5 @@
 module ActiveAdmin
-  class ResourceController < ::InheritedResources::Base
+  class ResourceController < BaseController
 
     # This module deals with the retrieval of collections for resources
     # within the resource controller.
@@ -42,9 +42,13 @@ module ActiveAdmin
 
         def sort_order(chain)
           params[:order] ||= active_admin_config.sort_order
-          table_name = active_admin_config.resource_table_name
           if params[:order] && params[:order] =~ /^([\w\_\.]+)_(desc|asc)$/
-            chain.order("#{table_name}.#{$1} #{$2}")
+            column = $1
+            order  = $2
+            table  = active_admin_config.resource_table_name
+            table_column = (column =~ /\./) ? column : "#{table}.#{column}"
+
+            chain.order("#{table_column} #{order}")
           else
             chain # just return the chain
           end
@@ -114,7 +118,8 @@ module ActiveAdmin
           chain.send(Kaminari.config.page_method_name, params[:page]).per(per_page)
         end
 
-       def per_page
+
+        def per_page
           return max_csv_records if request.format == 'text/csv'
           return max_per_page if active_admin_config.paginate == false
 

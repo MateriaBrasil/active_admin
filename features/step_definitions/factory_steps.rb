@@ -12,9 +12,9 @@ Given /^a post with the title "([^"]*)" written by "([^"]*)" exists$/ do |title,
   Post.create! :title => title, :author => author
 end
 
-Given /^(\d+) posts? exists?/ do |count|
+Given /^(\d+)( published)? posts? exists?$/ do |count, published|
   (0...count.to_i).each do |i|
-    Post.create! :title => "Hello World #{i}"
+    Post.create! :title => "Hello World #{i}", :published_at => (published ? Time.now : nil)
   end
 end
 
@@ -26,4 +26,11 @@ Given /^a (user|publisher) named "([^"]*)" exists$/ do |type, name|
   first, last = name.split(" ")
   type = type.camelize.constantize
   type.create! :first_name => first, :last_name => last, :username => name
+end
+
+Given /^I create a new post with the title "([^"]*)"$/ do |title|
+  click_link "Posts"
+  click_link "New Post"
+  fill_in :title, :with => title
+  click_button "Create Post"
 end

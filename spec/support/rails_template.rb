@@ -2,8 +2,11 @@
 
 # Create a cucumber database and environment
 copy_file File.expand_path('../templates/cucumber.rb', __FILE__), "config/environments/cucumber.rb"
+copy_file File.expand_path('../templates/cucumber_with_reloading.rb', __FILE__), "config/environments/cucumber_with_reloading.rb"
+
 gsub_file 'config/database.yml', /^test:.*\n/, "test: &test\n"
 gsub_file 'config/database.yml', /\z/, "\ncucumber:\n  <<: *test\n  database: db/cucumber.sqlite3"
+gsub_file 'config/database.yml', /\z/, "\ncucumber_with_reloading:\n  <<: *test\n  database: db/cucumber.sqlite3"
 
 # Generate some test models
 generate :model, "post title:string body:text published_at:datetime author_id:integer category_id:integer"
@@ -22,6 +25,14 @@ run "rm -r test"
 run "rm -r spec"
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+
+# we need this routing path, named "logout_path", for testing
+route <<-EOS
+  devise_scope :user do
+    match '/admin/logout' => 'active_admin/devise/sessions#destroy', :as => :logout
+  end
+EOS
+
 generate :'active_admin:install'
 
 # Setup a root path for devise
